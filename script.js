@@ -32,6 +32,7 @@ todoContent.addEventListener("click", e => {
     const target = e.target;
     if(target.getAttribute('id') == 'delete') todoContent.removeChild(e.target.parentNode);
     if(target.getAttribute('id') == 'edit') editItem(e);
+    if(target.getAttribute('id') == 'save') saveContent(e);
     
 })
 
@@ -52,4 +53,23 @@ function editItem(event){
     parent.removeChild(textContent);
     parent.appendChild(saveBtn);
     parent.appendChild(editInput);
+}
+
+function saveContent(event){
+    console.log('Save me');
+    const parent = event.target.parentNode;
+    const textInput = parent.children[2];
+    const saveBtn = parent.children[1];
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'edit';
+    editBtn.setAttribute('id', 'edit');
+    
+    const textContent = document.createElement('h3');
+    textContent.innerText = textInput.value;
+
+    parent.removeChild(saveBtn)
+    parent.removeChild(textInput);
+    parent.appendChild(editBtn);
+    parent.appendChild(textContent);
 }

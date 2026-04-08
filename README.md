@@ -6,3 +6,4 @@ Current state:
 2)By entering an input we get the note displayed
 3)Using X button notes can be deleted
 4)Pressing Edit button opens a new input section with current notes and a save button to save changes
+5)Pressing Save button saves changed text from editing  
