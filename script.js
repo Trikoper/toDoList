@@ -2,6 +2,10 @@ const form = document.querySelector('form');
 const todoInput = document.querySelector('#todo-input');
 const todoContent = document.querySelector('#todo-content');
 
+let toDoListNotes;
+if (localStorage.getItem("toDoList") !== null) toDoListNotes = JSON.parse(localStorage.getItem("toDoList"));
+else toDoListNotes = [];
+
 form.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -25,12 +29,21 @@ form.addEventListener("submit", e => {
 
     todoContent.appendChild(todoDiv);
     form.reset();
+
+    toDoListNotes.push(todoText.textContent)
+    localStorage.setItem("toDoList", JSON.stringify(toDoListNotes));
+    // const list = localStorage.getItem("toDoList");
+    // console.log(typeof(list));
+    // console.log(list);
 })
 
 
 todoContent.addEventListener("click", e => {
     const target = e.target;
-    if(target.getAttribute('id') == 'delete') todoContent.removeChild(e.target.parentNode);
+    if(target.getAttribute('id') == 'delete'){
+        //detele elemnt from localStorage 
+        todoContent.removeChild(e.target.parentNode);    
+    } 
     if(target.getAttribute('id') == 'edit') editItem(e);
     if(target.getAttribute('id') == 'save') saveContent(e);
     
@@ -72,4 +85,6 @@ function saveContent(event){
     parent.removeChild(textInput);
     parent.appendChild(editBtn);
     parent.appendChild(textContent);
+
+    //Modify existing element in localStorage and save
 }
