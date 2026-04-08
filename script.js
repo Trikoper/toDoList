@@ -2,9 +2,35 @@ const form = document.querySelector('form');
 const todoInput = document.querySelector('#todo-input');
 const todoContent = document.querySelector('#todo-content');
 
-let toDoListNotes;
-if (localStorage.getItem("toDoList") !== null) toDoListNotes = JSON.parse(localStorage.getItem("toDoList"));
-else toDoListNotes = [];
+
+// document.addEventListener('DOMContentLoaded', () => {
+    let testList = localStorage.getItem("toDoList");
+    let toDoListNotes;
+    if (testList !== null){
+        toDoListNotes = JSON.parse(testList);
+        toDoListNotes.forEach(note => {
+            const todoDiv = document.createElement('div');
+            todoDiv.classList.add('is-flex');
+
+            const todoText = document.createElement('h3');
+            todoText.textContent = note;
+
+            const todoDelete = document.createElement('button');
+            todoDelete.textContent = 'X';
+            todoDelete.setAttribute('id', 'delete');
+
+            const todoEdit = document.createElement('button');
+            todoEdit.textContent = 'Edit';
+            todoEdit.setAttribute('id', 'edit');
+
+            todoDiv.appendChild(todoDelete);
+            todoDiv.appendChild(todoEdit);
+            todoDiv.appendChild(todoText);
+            todoContent.appendChild(todoDiv);
+        })
+    }
+    else toDoListNotes = [];
+// });
 
 form.addEventListener("submit", e => {
     e.preventDefault();
@@ -26,15 +52,11 @@ form.addEventListener("submit", e => {
     todoDiv.appendChild(todoDelete);
     todoDiv.appendChild(todoEdit);
     todoDiv.appendChild(todoText);
-
     todoContent.appendChild(todoDiv);
     form.reset();
 
     toDoListNotes.push(todoText.textContent)
     localStorage.setItem("toDoList", JSON.stringify(toDoListNotes));
-    // const list = localStorage.getItem("toDoList");
-    // console.log(typeof(list));
-    // console.log(list);
 })
 
 
