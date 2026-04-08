@@ -83,6 +83,7 @@ function editItem(event){
 
     const editInput = document.createElement('input');
     editInput.value = textContent.innerText;
+    parent.setAttribute('oldNote', textContent.innerText)
 
     parent.removeChild(editBtn)
     parent.removeChild(textContent);
@@ -95,6 +96,7 @@ function saveContent(event){
     const parent = event.target.parentNode;
     const textInput = parent.children[2];
     const saveBtn = parent.children[1];
+    const oldNote = parent.getAttribute('oldNote');
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'edit';
@@ -108,5 +110,7 @@ function saveContent(event){
     parent.appendChild(editBtn);
     parent.appendChild(textContent);
 
-    //Modify existing element in localStorage and save
+    const index = toDoListNotes.indexOf(oldNote);
+    toDoListNotes[index] = textContent.innerText;
+    localStorage.setItem("toDoList", JSON.stringify(toDoListNotes));
 }
