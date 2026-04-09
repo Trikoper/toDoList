@@ -63,8 +63,11 @@ form.addEventListener("submit", e => {
 todoContent.addEventListener("click", e => {
     const target = e.target;
     if(target.getAttribute('id') == 'delete'){
-        //detele elemnt from localStorage 
-        todoContent.removeChild(e.target.parentNode);    
+        const parent = e.target.parentNode;
+        const text = parent.children[2].innerText;
+        toDoListNotes = toDoListNotes.filter(note => note !== text);
+        localStorage.setItem("toDoList", JSON.stringify(toDoListNotes));
+        todoContent.removeChild(parent);    
     } 
     if(target.getAttribute('id') == 'edit') editItem(e);
     if(target.getAttribute('id') == 'save') saveContent(e);
