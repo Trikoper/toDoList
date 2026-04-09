@@ -102,7 +102,7 @@ function saveContent(event){
     const oldNote = parent.getAttribute('oldNote');
 
     const editBtn = document.createElement('button');
-    editBtn.textContent = 'edit';
+    editBtn.textContent = 'Edit';
     editBtn.setAttribute('id', 'edit');
     
     const textContent = document.createElement('h3');
@@ -116,4 +116,14 @@ function saveContent(event){
     const index = toDoListNotes.indexOf(oldNote);
     toDoListNotes[index] = textContent.innerText;
     localStorage.setItem("toDoList", JSON.stringify(toDoListNotes));
+    
 }
+
+//Ideas for future:
+//If a note is opened for edit it will close and save any other note that is being edited (branch needed)
+//Ability to move a note around the list using 2 button up and down (will open a branch)
+//Can save by hittin Enter
+//Add a creation date at the end of note
+
+//Issues:
+//OldNote id stays there
