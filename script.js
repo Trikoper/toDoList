@@ -68,7 +68,23 @@ class ToDoApp{
     }
     
     editItem(e){ //editTodo
-        console.log("All good")
+        console.log("Editing right now")
+        const parent = event.target.parentNode;
+        const textContent = parent.children[2];
+        const editBtn = parent.children[1];
+
+        const saveBtn = document.createElement('button');
+        saveBtn.textContent = 'save';
+        saveBtn.setAttri2bute('id', 'save');
+
+        const editInput = document.createElement('input');
+        editInput.value = textContent.innerText;
+        parent.setAttribute('oldNote', textContent.innerText)
+
+        parent.removeChild(editBtn)
+        parent.removeChild(textContent);
+        parent.appendChild(saveBtn);
+        parent.appendChild(editInput);
     }
     
     saveItem(e){ //saveTodo
