@@ -133,6 +133,4 @@ function saveContent(event){
 //Cream o clasa ToDoList si cu dansa lucram (vezi foto)
 
 //bindEvents uneste functiile de click si submit
-    // this.
-    // this 
-//optimisare dupa ce scriem codul(sa nu se repete liniile de codw)
+//optimisare dupa ce scriem codul(sa nu se repete liniile de cod)

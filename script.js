@@ -1,6 +1,6 @@
 class ToDoApp{
     constructor(){
-        this.form = document.querySelector('form'); //astfel se va vedea in metode
+        this.form = document.querySelector('form');
         this.todoInput = document.querySelector('#todo-input');
         this.todoContent = document.querySelector('#todo-content');
         this.toDoListNotes= []
@@ -14,8 +14,7 @@ class ToDoApp{
         if (testList !== null){
             this.toDoListNotes = JSON.parse(testList);
             this.toDoListNotes.forEach(note => this.createToDoElement(note))
-    }
-    else this.toDoListNotes = [];
+        } else this.toDoListNotes = [];
     }
 
     bindEvents(){
@@ -42,7 +41,6 @@ class ToDoApp{
         todoDiv.appendChild(todoEdit);
         todoDiv.appendChild(todoText);
         this.todoContent.appendChild(todoDiv);
-        return todoText;
     }
 
     save(){
@@ -73,7 +71,6 @@ class ToDoApp{
     }
     
     editItem(e){ //editTodo
-        console.log("Editing right now")
         const parent = event.target.parentNode;
         const textContent = parent.children[2];
         const editBtn = parent.children[1];
@@ -93,7 +90,6 @@ class ToDoApp{
     }
     
     saveContent(e){ //saveTodo
-        console.log('Save me');
         const parent = event.target.parentNode;
         const textInput = parent.children[2];
         const saveBtn = parent.children[1];
