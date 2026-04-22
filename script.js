@@ -5,11 +5,36 @@ class ToDoApp{
         this.todoContent = document.querySelector('#todo-content');
         this.toDoListNotes= []
 
+        this.loadInitialData()
         this.bindEvents()
     }
 
     loadInitialData(){
+        let testList = localStorage.getItem("toDoList");
+        if (testList !== null){
+            this.toDoListNotes = JSON.parse(testList);
+            this.toDoListNotes.forEach(note => {
+                const todoDiv = document.createElement('div');
+                todoDiv.classList.add('is-flex');
 
+                const todoText = document.createElement('h3');
+                todoText.textContent = note;
+
+                const todoDelete = document.createElement('button');
+                todoDelete.textContent = 'X';
+                todoDelete.setAttribute('id', 'delete');
+
+                const todoEdit = document.createElement('button');
+                todoEdit.textContent = 'Edit';
+                todoEdit.setAttribute('id', 'edit');
+
+                todoDiv.appendChild(todoDelete);
+                todoDiv.appendChild(todoEdit);
+                todoDiv.appendChild(todoText);
+                this.todoContent.appendChild(todoDiv);
+        })
+    }
+    else this.toDoListNotes = [];
     }
 
     bindEvents(){
@@ -21,7 +46,7 @@ class ToDoApp{
 
     }
 
-    saveContent(){ //save
+    save(){ //save
 
     }
 
