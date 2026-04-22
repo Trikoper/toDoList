@@ -21,7 +21,7 @@ class ToDoApp{
 
     }
 
-    save(){
+    saveContent(){ //save
 
     }
 
@@ -75,7 +75,7 @@ class ToDoApp{
 
         const saveBtn = document.createElement('button');
         saveBtn.textContent = 'save';
-        saveBtn.setAttri2bute('id', 'save');
+        saveBtn.setAttribute('id', 'save');
 
         const editInput = document.createElement('input');
         editInput.value = textContent.innerText;
@@ -87,8 +87,28 @@ class ToDoApp{
         parent.appendChild(editInput);
     }
     
-    saveItem(e){ //saveTodo
-        console.log("All good too")
+    saveContent(e){ //saveTodo
+        console.log('Save me');
+        const parent = event.target.parentNode;
+        const textInput = parent.children[2];
+        const saveBtn = parent.children[1];
+        const oldNote = parent.getAttribute('oldNote');
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.setAttribute('id', 'edit');
+        
+        const textContent = document.createElement('h3');
+        textContent.innerText = textInput.value;
+
+        parent.removeChild(saveBtn)
+        parent.removeChild(textInput);
+        parent.appendChild(editBtn);
+        parent.appendChild(textContent);
+
+        const index = this.toDoListNotes.indexOf(oldNote);
+        this.toDoListNotes[index] = textContent.innerText;
+        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
     }
 }
 
