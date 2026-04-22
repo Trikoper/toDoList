@@ -42,7 +42,7 @@ class ToDoApp{
         this.todoContent.addEventListener('click', e => this.onClick(e))
     }
     
-    createToDoElement(id, text){
+    createToDoElement(){
 
     }
 
@@ -76,20 +76,18 @@ class ToDoApp{
     }
 
     onClick(e){
-        const target = e.target;
-        if(target.getAttribute('id') == 'delete'){
-            const parent = e.target.parentNode;
-            const text = parent.children[2].innerText;
-            this.toDoListNotes = this.toDoListNotes.filter(note => note !== text);
-            localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
-            this.todoContent.removeChild(parent);    
-        } 
-        if(target.getAttribute('id') == 'edit') this.editItem(e);
-        if(target.getAttribute('id') == 'save') this.saveContent(e);
+        const target = e.target.getAttribute('id');
+        if(target == 'delete') this.deleteToDo(e)
+        if(target == 'edit') this.editItem(e);
+        if(target == 'save') this.saveContent(e);
     }
 
     deleteToDo(e){
-
+        const parent = e.target.parentNode;
+            const text = parent.children[2].innerText;
+            this.toDoListNotes = this.toDoListNotes.filter(note => note !== text);
+            localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
+            this.todoContent.removeChild(parent);
     }
     
     editItem(e){ //editTodo
