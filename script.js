@@ -10,29 +10,10 @@ class ToDoApp{
     }
 
     loadInitialData(){
-        let testList = localStorage.getItem("toDoList");
+        const testList = localStorage.getItem("toDoList");
         if (testList !== null){
             this.toDoListNotes = JSON.parse(testList);
-            this.toDoListNotes.forEach(note => {
-                const todoDiv = document.createElement('div');
-                todoDiv.classList.add('is-flex');
-
-                const todoText = document.createElement('h3');
-                todoText.textContent = note;
-
-                const todoDelete = document.createElement('button');
-                todoDelete.textContent = 'X';
-                todoDelete.setAttribute('id', 'delete');
-
-                const todoEdit = document.createElement('button');
-                todoEdit.textContent = 'Edit';
-                todoEdit.setAttribute('id', 'edit');
-
-                todoDiv.appendChild(todoDelete);
-                todoDiv.appendChild(todoEdit);
-                todoDiv.appendChild(todoText);
-                this.todoContent.appendChild(todoDiv);
-        })
+            this.toDoListNotes.forEach(note => this.createToDoElement(note))
     }
     else this.toDoListNotes = [];
     }
@@ -42,20 +23,12 @@ class ToDoApp{
         this.todoContent.addEventListener('click', e => this.onClick(e))
     }
     
-    createToDoElement(){
-
-    }
-
-    save(){ //save
-        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
-    }
-
-    onSubmit(e){
-        e.preventDefault();
+    createToDoElement(note){
         const todoDiv = document.createElement('div');
         todoDiv.classList.add('is-flex');
+
         const todoText = document.createElement('h3');
-        todoText.textContent = this.todoInput.value;
+        todoText.textContent = note;
 
         const todoDelete = document.createElement('button');
         todoDelete.textContent = 'X';
@@ -69,10 +42,19 @@ class ToDoApp{
         todoDiv.appendChild(todoEdit);
         todoDiv.appendChild(todoText);
         this.todoContent.appendChild(todoDiv);
-        this.form.reset();
+        return todoText;
+    }
 
-        this.toDoListNotes.push(todoText.textContent);
+    save(){
+        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        this.createToDoElement(this.todoInput.value);
+        this.toDoListNotes.push(this.todoInput.value);
         this.save();
+        this.form.reset();
     }
 
     onClick(e){
