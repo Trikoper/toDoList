@@ -47,7 +47,7 @@ class ToDoApp{
     }
 
     save(){ //save
-
+        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
     }
 
     onSubmit(e){
@@ -72,7 +72,7 @@ class ToDoApp{
         this.form.reset();
 
         this.toDoListNotes.push(todoText.textContent);
-        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
+        this.save();
     }
 
     onClick(e){
@@ -131,7 +131,7 @@ class ToDoApp{
 
         const index = this.toDoListNotes.indexOf(oldNote);
         this.toDoListNotes[index] = textContent.innerText;
-        localStorage.setItem("toDoList", JSON.stringify(this.toDoListNotes));
+        this.save();
     }
 }
 
